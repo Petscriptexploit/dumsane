@@ -7,22 +7,22 @@ import { setString } from "@vendetta/metro/common/clipboard";
 import { before as patchBefore } from "@vendetta/patcher";
 import { showToast } from "@vendetta/ui/toasts";
 import { encode as encodeTok, characters2 } from "../../common/numberBase64";
+
 const {
 	meta: { resolveSemanticColor },
 } = findByProps("colors", "meta");
 const ThemeStore = findByStoreName("ThemeStore");
 
 export const EMBED_COLOR = () =>
-		parseInt(resolveSemanticColor(ThemeStore.theme, semanticColors.BACKGROUND_SECONDARY).slice(1), 16),
-	/* thanks Rosie (@acquite <@581573474296791211>) */
+		parseInt(resolveSemanticColor(ThemeStore.theme, semanticColors.BACKGROUND_SECONDARY).slice(1), 16);
 
-	authorMods = {
-		author: {
-			username: "TokenUtils",
-			avatar: "command",
-			avatarURL: common.AVATARS.command,
-		},
-	};
+const authorMods = {
+	author: {
+		username: "TokenUtils",  // Ensure this is a string, not an array
+		avatar: "command",
+		avatarURL: common.AVATARS.command,
+	},
+};
 
 let madeSendMessage;
 function sendMessage() {
@@ -70,13 +70,13 @@ export default {
 						props.hideActionSheet();
 						} catch (e) {
 							console.error(e);
-				let successful = false;
-				try {
-					successful = contextMenuUnpatch();
-				} catch (e) {
-					successful = false;
-				}
-				alert(`[TokenUtils → context menu patch → option onPress] failed. Patch ${successful ? "dis" : "en"}abled\n` + e.stack);
+							let successful = false;
+							try {
+								successful = contextMenuUnpatch();
+							} catch (e) {
+								successful = false;
+							}
+							alert(`[TokenUtils → context menu patch → option onPress] failed. Patch ${successful ? "dis" : "en"}abled\n` + e.stack);
 						}
 					},
 				});
@@ -88,7 +88,7 @@ export default {
 				} catch (e) {
 					successful = false;
 				}
-				alert(`[TokenUtils → context menu patch] failed. Patch ${successful ? "dis" : "en"}abled\n` + e.stack);
+				alert(`[TokenUtils → context menu patch] failed. Patch ${successful ? "dis" : "en"}bled\n` + e.stack);
 			}
 		});
 		this.patches.push(contextMenuUnpatch);
@@ -103,6 +103,10 @@ export default {
 								user: findByStoreName("UserStore").getCurrentUser(),
 							},
 						};
+
+						// Log the messageMods for debugging
+						console.log("MessageMods (get):", messageMods);
+
 						const { getToken } = findByProps("getToken");
 
 						sendMessage(
@@ -122,7 +126,7 @@ export default {
 						);
 					} catch (e) {
 						console.error(e);
-						alert("There was an error while exeCuting /token get\n" + e.stack);
+						alert("There was an error while executing /token get\n" + e.stack);
 					}
 				},
 				login(args, ctx) {
@@ -134,6 +138,10 @@ export default {
 								user: findByStoreName("UserStore").getCurrentUser(),
 							},
 						};
+
+						// Log the messageMods for debugging
+						console.log("MessageMods (login):", messageMods);
+
 						const options = new Map(args.map((a) => [a.name, a]));
 						const token = options.get("token").value;
 						try {
