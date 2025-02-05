@@ -7,7 +7,7 @@
             "id": "744276454946242723"
         }
     ],
-    "main": "./ind.js",
+    "main": "./ind.ts",
     "vendetta": {
         "icon": "ChannelListMagnifyingGlassIcon"
     }
