@@ -7,7 +7,7 @@
             "id": "744276454946242723"
         }
     ],
-    "main": "./ind.js",  // Local reference to the index.js file
+    "main": "./ind.js",
     "vendetta": {
         "icon": "ChannelListMagnifyingGlassIcon"
     }
